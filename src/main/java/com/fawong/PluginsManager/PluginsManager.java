@@ -179,7 +179,7 @@ public class PluginsManager extends JavaPlugin {
 				mcl.log(Level.SEVERE, "[PluginsManager]: " + config_file_name + " file is not in the proper format");
 				return false;
 			} else {
-				mcl.log(Level.INFO, "[PluginsManager]: " + config_file_name + " file successful loaded");
+				mcl.log(Level.INFO, "[PluginsManager]: " + config_file_name + " file successfully loaded");
 				output_toggle_value = output_toggle_value.trim().toLowerCase();
 				column_view_value = column_view_value.trim().toLowerCase();
 				last_updated_value = last_updated_value.trim().toLowerCase();
