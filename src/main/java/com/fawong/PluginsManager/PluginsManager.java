@@ -79,11 +79,10 @@ public class PluginsManager extends JavaPlugin {
 
 		// Register events
 		pm = getServer().getPluginManager();
-		//pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, playerListener, Event.Priority.Monitor, this);
 
 		// EXAMPLE: Custom code, here we just output some info so we can check all is well
-		pdFile = this.getDescription();
-		mcl.log(Level.INFO, pdFile.getName() + " version " + pdFile.getVersion() + " enabled");
+		pdFile = getDescription();
+		mcl.log(Level.INFO, "[PluginsManager]: " + pdFile.getName() + " version " + pdFile.getVersion() + " enabled");
 
 		// Call method to list plugins to a file.
 		if (loadSettings()) {
@@ -105,8 +104,8 @@ public class PluginsManager extends JavaPlugin {
 		// NOTE: All registered events are automatically unregistered when a plugin is disabled
 
 		// EXAMPLE: Custom code, here we just output some info so we can check all is well
-		pdFile = this.getDescription();
-		mcl.log(Level.INFO, pdFile.getName() + " version " + pdFile.getVersion() + " disabled");
+		pdFile = getDescription();
+		mcl.log(Level.INFO, "[PluginsManager]: " + pdFile.getName() + " version " + pdFile.getVersion() + " disabled");
 		output_toggle_value = null;
 		output_file_name_value = null;
 		output_folder_name_value = null;
@@ -121,18 +120,6 @@ public class PluginsManager extends JavaPlugin {
 		listofplugins = null;
 		nameofplugins = null;
 		prop = null;
-		}
-
-	public boolean isDebugging(final Player player) {
-		if (debugees.containsKey(player)) {
-			return debugees.get(player);
-		} else {
-			return false;
-		}
-	}
-
-	public void setDebugging(final Player player, final boolean value) {
-		debugees.put(player, value);
 	}
 
 	@Override
@@ -273,5 +260,17 @@ public class PluginsManager extends JavaPlugin {
 		} catch (IOException ioe) {
 			mcl.log(Level.SEVERE, "[PluginsManager]: " + output_file_name_value + " could not be created");
 		}
+	}
+
+	public boolean isDebugging(final Player player) {
+		if (debugees.containsKey(player)) {
+			return debugees.get(player);
+		} else {
+			return false;
+		}
+	}
+
+	public void setDebugging(final Player player, final boolean value) {
+		debugees.put(player, value);
 	}
 }
