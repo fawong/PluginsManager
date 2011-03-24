@@ -124,7 +124,10 @@ public class PluginsManager extends JavaPlugin {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-		System.out.println(isEnabled());
+		System.out.println(sender);
+		System.out.println(command);
+		System.out.println(commandLabel);
+		System.out.println(args);
 		if (isEnabled()) {
 			String commandName = command.getName().toLowerCase();
 			if (sender instanceof Player) {
@@ -134,6 +137,7 @@ public class PluginsManager extends JavaPlugin {
 				}
 				return true;
 			} else {
+				sender.sendMessage("[PluginsManager]: You need to be a player to run this command");
 				return false;
 			}
 		}
