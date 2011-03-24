@@ -136,9 +136,8 @@ public class PluginsManager extends JavaPlugin {
 			} else {
 				return false;
 			}
-		} else {
-			return false;
 		}
+		return super.onCommand(sender, command, commandLabel, args);
 	}
 
 	public void setDefaultSettings() {
@@ -256,7 +255,7 @@ public class PluginsManager extends JavaPlugin {
 			BufferedWriter out = new BufferedWriter(fw);
 			out.write(printtofile);
 			out.close();
-			mcl.log(Level.SEVERE, "[PluginsManager]: " + output_file_name_value + " successfully created");
+			mcl.log(Level.INFO, "[PluginsManager]: " + output_file_name_value + " successfully created");
 		} catch (IOException ioe) {
 			mcl.log(Level.SEVERE, "[PluginsManager]: " + output_file_name_value + " could not be created");
 		}
