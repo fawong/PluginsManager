@@ -129,7 +129,7 @@ public class PluginsManager extends JavaPlugin {
 			String commandName = command.getName().toLowerCase();
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
-				if ((commandName.equalsIgnoreCase("listplugins")) || (commandName.equalsIgnoreCase("lp"))) {
+				if ((commandLabel.equalsIgnoreCase("listplugins")) || (commandLabel.equalsIgnoreCase("lp"))) {
 					player.sendMessage("commandName");
 				}
 				return true;
@@ -203,7 +203,7 @@ public class PluginsManager extends JavaPlugin {
 		}
 		for (int j = 0; j < nameofplugins.length; j++) {
 			if (j < nameofplugins.length - 1) {
-				if (column_view_value.equalsIgnoreCase("no")) {
+				if (column_view_value.equalsIgnoreCase("off")) {
 					returnstring += nameofplugins[j] + ", ";
 				} else {
 					returnstring += nameofplugins[j] + "<br />\n";
