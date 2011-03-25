@@ -124,16 +124,12 @@ public class PluginsManager extends JavaPlugin {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-		System.out.println(sender);
-		System.out.println(command);
-		System.out.println(commandLabel);
-		System.out.println(args);
 		if (isEnabled()) {
 			String commandName = command.getName().toLowerCase();
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if ((commandLabel.equalsIgnoreCase("listplugins")) || (commandLabel.equalsIgnoreCase("lp"))) {
-					player.sendMessage("commandName");
+					player.sendMessage(fullPluginNames());
 				}
 				return true;
 			} else {

@@ -3,10 +3,14 @@ website: http://fawong.com/
 main: com.fawong.PluginsManager.PluginsManager
 description: Helps manage plugins installed on the server
              Various plugin and server related additions
-version: 11.03.24
+version: 11.03.25
 author: FAWONG
 commands:
-  none:
-    description: none at the moment
+  lp:
+    description: Lists plugins in several different formats
     usage: |
-           /<command>
+           /listplugins
+  listplugins:
+    description: alias for /listplugins
+    usage: |
+           /lp
