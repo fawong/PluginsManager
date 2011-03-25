@@ -8,9 +8,7 @@ author: FAWONG
 commands:
   lp:
     description: Lists plugins in several different formats
-    usage: |
-           /listplugins
+    usage: /listplugins
   listplugins:
     description: alias for /listplugins
-    usage: |
-           /lp
+    usage: /lp
