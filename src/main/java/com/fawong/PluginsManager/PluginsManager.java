@@ -126,18 +126,51 @@ public class PluginsManager extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		if (isEnabled()) {
 			String commandName = command.getName().toLowerCase();
-			if (sender instanceof Player) {
+			if ((commandName.equalsIgnoreCase("listplugins")) || (commandName.equalsIgnoreCase("lp"))) {
+				if (args.length != 0) {
+					boolean col = args[0].equalsIgnoreCase("column");
+					boolean row = args[0].equalsIgnoreCase("row");
+					if (col || row) {
+						String[] fpn = getFullPluginNames();
+						String sendstring = "";
+						for (int i = 0; i < fpn.length; i++) {
+							if (i < fpn.length - 1) {
+								if (col) {
+									sendstring = sendstring + fpn[i] + "\n";
+								}
+								else if (row) {
+									sendstring = sendstring + fpn[i] + ", ";
+								} else {
+									mcl.log(Level.SEVERE, "This should not happen.");
+								}
+							} else {
+								sendstring += fpn[i];
+							}
+						}
+						sender.sendMessage(sendstring);
+						return true;
+					} else {
+						sender.sendMessage("[PluginsManager]: You must specify either \"column\" or \"row\"");
+						return true;
+					}
+				} else {
+					sender.sendMessage("[PluginsManager]: You must specify an argument");
+					return true;
+				}
+			}
+			else if (sender instanceof Player) {
 				Player player = (Player) sender;
-				if ((commandLabel.equalsIgnoreCase("listplugins")) || (commandLabel.equalsIgnoreCase("lp"))) {
-					player.sendMessage(fullPluginNames());
+				if ((commandName.equalsIgnoreCase("pm")) || (commandName.equalsIgnoreCase("pluginsmanager"))) { 
+					player.sendMessage("poke");
 				}
 				return true;
 			} else {
 				sender.sendMessage("[PluginsManager]: You need to be a player to run this command");
-				return false;
+				return true;
 			}
+		} else {
+			return false;
 		}
-		return super.onCommand(sender, command, commandLabel, args);
 	}
 
 	public void setDefaultSettings() {
@@ -193,17 +226,22 @@ public class PluginsManager extends JavaPlugin {
 		}
 	}
 
-	private String fullPluginNames() {
+	private String[] getFullPluginNames() {
 		listofplugins = pm.getPlugins();
-		nameofplugins = new String[listofplugins.length];
-		String returnstring = "";
+		String[] returnstring = new String[listofplugins.length];
 		for (int i = 0; i < listofplugins.length; i++) {
 			pdFile = listofplugins[i].getDescription();
-			nameofplugins[i] = pdFile.getFullName();
+			returnstring[i] = pdFile.getFullName();
 		}
+		return returnstring;
+	}
+
+	private String listFullPluginNames(String cvv) {
+		String returnstring = "";
+		nameofplugins = getFullPluginNames();
 		for (int j = 0; j < nameofplugins.length; j++) {
 			if (j < nameofplugins.length - 1) {
-				if (column_view_value.equalsIgnoreCase("off")) {
+				if (cvv.equalsIgnoreCase("off")) {
 					returnstring += nameofplugins[j] + ", ";
 				} else {
 					returnstring += nameofplugins[j] + "<br />\n";
@@ -244,7 +282,7 @@ public class PluginsManager extends JavaPlugin {
 		printtofile += "<body>\n";
 		printtofile += "<strong>" + server_pretext_value + "</strong><br />" + getServer().getVersion() + "\n<br /><br />\n";
 		printtofile += "<strong>" + plugins_pretext_value + "</strong><br />\n";
-		printtofile += fullPluginNames();
+		printtofile += listFullPluginNames(column_view_value);
 		printtofile += lastUpdatedDate();
 		printtofile += pluginNameBranding();
 		printtofile += "\n</body>\n";
