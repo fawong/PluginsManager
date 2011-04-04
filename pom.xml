@@ -4,7 +4,7 @@
   <groupId>com.fawong.PluginsManager</groupId>
   <artifactId>PluginsManager</artifactId>
   <packaging>jar</packaging>
-  <version>11.03.26</version>
+  <version>11.04.03</version>
   <name>PluginsManager</name>
   <url>http://maven.apache.org</url>
   <dependencies>

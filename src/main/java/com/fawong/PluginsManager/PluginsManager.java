@@ -53,6 +53,8 @@ public class PluginsManager extends JavaPlugin {
 	private static String server_pretext_default_value = "This server runs:";
 	private static String plugins_pretext = "plugins_pretext";
 	private static String plugins_pretext_default_value = "This server uses the following plugins:";
+	private static String css_file_name = "css_file_name";
+	private static String css_file_name_default_value = "CHANGE THIS VALUE";
 	private static File config_file = new File(config_folder_name, config_file_name);
 	private String output_toggle_value = "";
 	private String output_file_name_value = "";
@@ -62,6 +64,7 @@ public class PluginsManager extends JavaPlugin {
 	private String plugin_name_branding_value = "";
 	private String server_pretext_value = "";
 	private String plugins_pretext_value = "";
+	private String css_file_name_value = "";
 	private Logger mcl = Logger.getLogger("Minecraft");
 	private PluginManager pm; 
 	private PluginDescriptionFile pdFile;
@@ -114,6 +117,7 @@ public class PluginsManager extends JavaPlugin {
 		plugin_name_branding_value = null;
 		server_pretext_value = null;
 		plugins_pretext_value = null;
+		css_file_name_value = null;
 		mcl = null;
 		pm = null;
 		pdFile = null;
@@ -160,7 +164,7 @@ public class PluginsManager extends JavaPlugin {
 			}
 			else if (sender instanceof Player) {
 				Player player = (Player) sender;
-				if ((commandName.equalsIgnoreCase("pm")) || (commandName.equalsIgnoreCase("pluginsmanager"))) { 
+				if ((commandName.equalsIgnoreCase("pmgr")) || (commandName.equalsIgnoreCase("pluginsmanager"))) { 
 					player.sendMessage("poke");
 				}
 				return true;
@@ -182,6 +186,7 @@ public class PluginsManager extends JavaPlugin {
 		prop.setProperty(plugin_name_branding, "" + plugin_name_branding_default_value);
 		prop.setProperty(server_pretext, "" + server_pretext_default_value);
 		prop.setProperty(plugins_pretext, "" + plugins_pretext_default_value);
+		prop.setProperty(css_file_name, "" + css_file_name_default_value);
 		File config_folder = new File(config_folder_name);
 		try {
 			if (!config_folder.exists()) {
@@ -206,8 +211,10 @@ public class PluginsManager extends JavaPlugin {
 			plugin_name_branding_value = prop.getProperty(plugin_name_branding);
 			server_pretext_value = prop.getProperty(server_pretext);
 			plugins_pretext_value = prop.getProperty(plugins_pretext);
-			if (output_toggle_value == null || output_folder_name_value == null || output_file_name_value == null || column_view_value == null ||
-			last_updated_value == null || plugin_name_branding_value == null || server_pretext_value == null || plugins_pretext_value == null) {
+			css_file_name_value = prop.getProperty(css_file_name);
+			if (output_toggle_value == null || output_folder_name_value == null || output_file_name_value == null ||
+			column_view_value == null || last_updated_value == null || plugin_name_branding_value == null ||
+			server_pretext_value == null || plugins_pretext_value == null || css_file_name_value == null) {
 				mcl.log(Level.SEVERE, "[PluginsManager]: " + config_file_name + " file is not in the proper format");
 				return false;
 			} else {
@@ -247,7 +254,7 @@ public class PluginsManager extends JavaPlugin {
 					returnstring += nameofplugins[j] + "<br />\n";
 				}
 			} else {
-				returnstring += nameofplugins[j];
+				returnstring += nameofplugins[j] + "<br /><br /><br /><br />\n";
 			}
 		}
 		return returnstring;
@@ -258,16 +265,17 @@ public class PluginsManager extends JavaPlugin {
 		if (last_updated_value.equalsIgnoreCase("on")) {
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd @ HH:mm:ss");		
-			returnstring = "\n<br /><br /><br /><br />\nThis page was generated on: " + sdf.format(date);
+			returnstring = "This page was generated on: " + sdf.format(date) + "\n";
 		}
 		return returnstring;
 	}
 
 	private String pluginNameBranding() {
 		String returnstring = "";
+		System.out.println(plugin_name_branding_value);
 		if (plugin_name_branding_value.equalsIgnoreCase("on")) {
 			pdFile = getDescription();
-			returnstring += " using " + pdFile.getFullName() + "<br />\n";
+			returnstring += "Using " + pdFile.getFullName() + "<br />\n";
 		}
 		return returnstring;
 	}
@@ -277,15 +285,18 @@ public class PluginsManager extends JavaPlugin {
 		printtofile += "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n";
 		printtofile += "<head>\n";
 		printtofile += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\" />\n";
+		if (css_file_name_value.length() != 0) {
+			printtofile += "<link rel=\"stylesheet\" href=\"" + css_file_name_value + "\" type=\"text/css\" />\n";
+		}
 		printtofile += "<title>" + getServer().getName() + "</title>\n";
 		printtofile += "</head>\n";
 		printtofile += "<body>\n";
-		printtofile += "<strong>" + server_pretext_value + "</strong><br />" + getServer().getVersion() + "\n<br /><br />\n";
+		printtofile += "<strong>" + server_pretext_value + "</strong><br />\n" + getServer().getVersion() + "\n<br /><br />\n";
 		printtofile += "<strong>" + plugins_pretext_value + "</strong><br />\n";
 		printtofile += listFullPluginNames(column_view_value);
 		printtofile += lastUpdatedDate();
 		printtofile += pluginNameBranding();
-		printtofile += "\n</body>\n";
+		printtofile += "</body>\n";
 		printtofile += "</html>\n";
 		try {
 			File file_to_output = new File(output_folder_name_value, output_file_name_value);
