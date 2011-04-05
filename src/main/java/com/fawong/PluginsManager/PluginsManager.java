@@ -35,7 +35,7 @@ public class PluginsManager extends JavaPlugin {
 	//private final PluginsManagerPlayerListener playerListener = new PluginsManagerPlayerListener(this);
 	private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
 	private static String config_folder_name = "plugins/PluginsManager";
-	private static String config_file_name = "config.yml";
+	private static String config_file_name = "pluginsmanager.settings";
 	private static String config_file_name_comment = "Plugins Manager Configuration File";
 	private static String output_toggle = "toggle";
 	private static String output_toogle_default_value = "on";
@@ -272,7 +272,6 @@ public class PluginsManager extends JavaPlugin {
 
 	private String pluginNameBranding() {
 		String returnstring = "";
-		System.out.println(plugin_name_branding_value);
 		if (plugin_name_branding_value.equalsIgnoreCase("on")) {
 			pdFile = getDescription();
 			returnstring += "Using " + pdFile.getFullName() + "<br />\n";
