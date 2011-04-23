@@ -178,15 +178,15 @@ public class PluginsManager extends JavaPlugin {
 	}
 
 	public void setDefaultSettings() {
-		prop.setProperty(output_toggle, "" + output_toogle_default_value);
-		prop.setProperty(output_folder_name, "" + output_folder_name_default_value);
-		prop.setProperty(output_file_name, "" + output_file_name_default_value);
-		prop.setProperty(column_view, "" + column_view_default_value);
-		prop.setProperty(last_updated, "" + last_updated_default_value);
-		prop.setProperty(plugin_name_branding, "" + plugin_name_branding_default_value);
-		prop.setProperty(server_pretext, "" + server_pretext_default_value);
-		prop.setProperty(plugins_pretext, "" + plugins_pretext_default_value);
-		prop.setProperty(css_file_name, "" + css_file_name_default_value);
+		prop.setProperty(output_toggle, output_toogle_default_value);
+		prop.setProperty(output_folder_name, output_folder_name_default_value);
+		prop.setProperty(output_file_name, output_file_name_default_value);
+		prop.setProperty(column_view, column_view_default_value);
+		prop.setProperty(last_updated, last_updated_default_value);
+		prop.setProperty(plugin_name_branding, plugin_name_branding_default_value);
+		prop.setProperty(server_pretext, server_pretext_default_value);
+		prop.setProperty(plugins_pretext, plugins_pretext_default_value);
+		prop.setProperty(css_file_name, css_file_name_default_value);
 		File config_folder = new File(config_folder_name);
 		try {
 			if (!config_folder.exists()) {
