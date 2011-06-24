@@ -1,6 +1,6 @@
 name: PluginsManager
 main: com.fawong.PluginsManager.PluginsManager
-version: 11.04.23
+version: 11.06.24
 website: http://fawong.com/
 author: FAWONG
 description: >
@@ -10,7 +10,7 @@ commands:
   lp:
     description: Lists plugins in several different formats
     usage: |
-           /<command> <display_type>
+           /<command> <display type>
            Example: /<command> row
            Example: /<command> column
   listplugins:
