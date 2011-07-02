@@ -1,6 +1,6 @@
 name: PluginsManager
 main: com.fawong.PluginsManager.PluginsManager
-version: 11.07.01
+version: 11.07.02
 website: http://fawong.com/
 author: FAWONG
 description: >

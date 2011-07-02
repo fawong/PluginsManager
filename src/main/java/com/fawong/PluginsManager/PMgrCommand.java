@@ -27,7 +27,7 @@ public class PMgrCommand implements CommandExecutor, PluginsManagerSettings{
 			System.out.println("poke");
 			return true;
 		} else {
-			sender.sendMessage("[PluginsManager]: You need to be a player to run this command");
+			sender.sendMessage(plugin.pluginMessageString("You need to be a player to run this command"));
 			return true;
 		}
 	}

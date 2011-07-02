@@ -2,6 +2,8 @@ package com.fawong.PluginsManager;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Properties;
+import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 
 /**
@@ -10,7 +12,9 @@ import org.bukkit.entity.Player;
 * @author fawong
 */
 public interface PluginsManagerSettings {
-	final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
+	HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
+	Logger mcl = Logger.getLogger("Minecraft");
+	Properties prop = new Properties();
 	String config_folder_name = "plugins/PluginsManager";
 	String config_file_name = "pluginsmanager.settings";
 	String config_file_name_comment = "Plugins Manager Configuration File";

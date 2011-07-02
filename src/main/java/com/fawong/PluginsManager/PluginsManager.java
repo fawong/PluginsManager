@@ -33,10 +33,8 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 	private String toggle_value = "";
 	private Logger mcl = Logger.getLogger("Minecraft");
 	private PluginManager pm;
-	private PluginDescriptionFile pdFile = getDescription();
-	private Plugin[] listofplugins;
-	private String[] nameofplugins;
-	private Properties prop = new Properties();
+	private PluginDescriptionFile pdFile;
+	private ListPlugins lp = new ListPlugins(this);
 
 	public PluginsManager() {
 		// Custom initialisation code here
@@ -45,12 +43,12 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 
 	public void onEnable() {
 		// Custom enable code here including the registration of any events
-
 		// Register events
 		pm = getServer().getPluginManager();
 
 		// EXAMPLE: Custom code, here we just output some info so we can check all is well
-		mcl.log(Level.INFO, "[PluginsManager]: " + pdFile.getName() + " version " + pdFile.getVersion() + " enabled");
+		pdFile = getDescription();
+		mcl.log(Level.INFO, pluginMessageString(pdFile.getName() + " version " + pdFile.getVersion() + " enabled"));
 
 		// Set Executor file to use
 		getCommand("pmgr").setExecutor(new PMgrCommand(this));
@@ -58,28 +56,45 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 		getCommand("listplugins").setExecutor(new ListPluginsCommand(this));
 
 		// Call method to list plugins to a file.
-		if (loadSettings()) {
-			mcl.log(Level.INFO, "[PluginsManager]: settings have been loaded");
-			if (toggle_value.equals("off")) {
-				mcl.log(Level.INFO, "[PluginsManager]: Toggle value off");
-				mcl.log(Level.INFO, "[PluginsManager]: Plugin will be disabled");
-				pm.disablePlugin(this);
-			}
+		if (pluginToggleOff()) {
+			mcl.log(Level.INFO, pluginMessageString("Toggle value off"));
+			mcl.log(Level.INFO, pluginMessageString("Plugin will be disabled"));
+			pm.disablePlugin(this);
+			return;
 		} else {
-			mcl.log(Level.SEVERE, "[PluginsManager]: Please configure the " + config_file_name + " file and reload the plugin");
+			if (lp.loadListPluginSettings()) {
+				mcl.log(Level.INFO, pluginMessageString("Settings have been successfully loaded"));
+			} else {
+				mcl.log(Level.SEVERE, pluginMessageString("Please configure the " + config_file_name + " file and reload the plugin"));
+			}
 		}
 	}
 
 	public void onDisable() {
-		// Custom disable code here
-
 		// NOTE: All registered events are automatically unregistered when a plugin is disabled
-
+		// Custom disable code here
 		// EXAMPLE: Custom code, here we just output some info so we can check all is well
-		mcl.log(Level.INFO, "[PluginsManager]: " + pdFile.getName() + " version " + pdFile.getVersion() + " disabled");
+		pdFile = getDescription();
+		mcl.log(Level.INFO, pluginMessageString(pdFile.getName() + " version " + pdFile.getVersion() + " disabled"));
 	}
 
-	public void setDefaultSettings() {
+	private boolean pluginToggleOff() {
+		try {
+			prop.load(new FileInputStream(config_file));
+			toggle_value = prop.getProperty(toggle);
+			toggle_value = toggle_value.trim().toLowerCase();
+			if (toggle_value.equals("off")) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch(IOException ioe) {
+			setDefaultSettings();
+			return false;
+		}
+	}
+
+	private void setDefaultSettings() {
 		prop.setProperty(toggle, toggle_default_value);
 		prop.setProperty(output_folder_name, output_folder_name_default_value);
 		prop.setProperty(output_file_name, output_file_name_default_value);
@@ -96,43 +111,14 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 			}
 			OutputStream os = new FileOutputStream(config_file);
 			prop.store(os, config_file_name_comment);
-			mcl.log(Level.INFO, "[PluginsManager]: default configuration file successfully created");
+			mcl.log(Level.INFO, pluginMessageString("Default configuration file successfully created"));
 		} catch (IOException ioe) {
-			mcl.log(Level.SEVERE, "[PluginsManager]: default configuration file could not be written to");
+			mcl.log(Level.SEVERE, pluginMessageString("Default configuration file could not be written to"));
 		}
 	}
 
-	public boolean loadSettings() {
-		try {
-			prop.load(new FileInputStream(config_file));
-			toggle_value = prop.getProperty(toggle);
-			output_folder_name_value = prop.getProperty(output_folder_name);
-			output_file_name_value = prop.getProperty(output_file_name);
-			column_view_value = prop.getProperty(column_view);
-			last_updated_value = prop.getProperty(last_updated);
-			plugin_name_branding_value = prop.getProperty(plugin_name_branding);
-			server_pretext_value = prop.getProperty(server_pretext);
-			plugins_pretext_value = prop.getProperty(plugins_pretext);
-			css_file_name_value = prop.getProperty(css_file_name);
-			if (toggle_value == null || output_folder_name_value == null || output_file_name_value == null ||
-			column_view_value == null || last_updated_value == null || plugin_name_branding_value == null ||
-			server_pretext_value == null || plugins_pretext_value == null || css_file_name_value == null) {
-				mcl.log(Level.SEVERE, "[PluginsManager]: " + config_file_name + " file is not in the proper format");
-				return false;
-			} else {
-				mcl.log(Level.INFO, "[PluginsManager]: " + config_file_name + " file successfully loaded");
-				toggle_value = toggle_value.trim().toLowerCase();
-				column_view_value = column_view_value.trim().toLowerCase();
-				last_updated_value = last_updated_value.trim().toLowerCase();
-				plugin_name_branding_value = plugin_name_branding_value.trim().toLowerCase();
-				return true;
-			}
-		} catch (IOException ioe) {
-			mcl.log(Level.SEVERE, "[PluginsManager]: " + config_file_name + " file could not be loaded");
-			prop.clear();
-			setDefaultSettings();
-			return false;
-		}
+	protected String pluginMessageString(String s) {
+		return "[PluginsManager]: " + s;
 	}
 
 	public boolean isDebugging(final Player player) {
