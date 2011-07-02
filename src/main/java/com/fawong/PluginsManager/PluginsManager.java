@@ -29,22 +29,14 @@ import org.bukkit.command.Command;
 *
 * @author fawong
 */
-public class PluginsManager extends JavaPlugin implements PluginsManagerSettings{
-	String toggle_value = "";
-	String output_file_name_value = "";
-	String output_folder_name_value = "";
-	String column_view_value = "";
-	String last_updated_value = "";
-	String plugin_name_branding_value = "";
-	String server_pretext_value = "";
-	String plugins_pretext_value = "";
-	String css_file_name_value = "";
-	Logger mcl = Logger.getLogger("Minecraft");
-	PluginManager pm = null;
-	PluginDescriptionFile pdFile = null;
-	Plugin[] listofplugins = null;
-	String[] nameofplugins = null;
-	Properties prop = new Properties();
+public class PluginsManager extends JavaPlugin implements PluginsManagerSettings {
+	private String toggle_value = "";
+	private Logger mcl = Logger.getLogger("Minecraft");
+	private PluginManager pm;
+	private PluginDescriptionFile pdFile = getDescription();
+	private Plugin[] listofplugins;
+	private String[] nameofplugins;
+	private Properties prop = new Properties();
 
 	public PluginsManager() {
 		// Custom initialisation code here
@@ -58,7 +50,6 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 		pm = getServer().getPluginManager();
 
 		// EXAMPLE: Custom code, here we just output some info so we can check all is well
-		pdFile = getDescription();
 		mcl.log(Level.INFO, "[PluginsManager]: " + pdFile.getName() + " version " + pdFile.getVersion() + " enabled");
 
 		// Set Executor file to use
@@ -70,9 +61,9 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 		if (loadSettings()) {
 			mcl.log(Level.INFO, "[PluginsManager]: settings have been loaded");
 			if (toggle_value.equals("off")) {
-				pm.disablePlugin(this);
 				mcl.log(Level.INFO, "[PluginsManager]: Toggle value off");
-				mcl.log(Level.INFO, "[PluginsManager]: Plugin disabled");
+				mcl.log(Level.INFO, "[PluginsManager]: Plugin will be disabled");
+				pm.disablePlugin(this);
 			}
 		} else {
 			mcl.log(Level.SEVERE, "[PluginsManager]: Please configure the " + config_file_name + " file and reload the plugin");
@@ -85,23 +76,7 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 		// NOTE: All registered events are automatically unregistered when a plugin is disabled
 
 		// EXAMPLE: Custom code, here we just output some info so we can check all is well
-		pdFile = getDescription();
 		mcl.log(Level.INFO, "[PluginsManager]: " + pdFile.getName() + " version " + pdFile.getVersion() + " disabled");
-		toggle_value = null;
-		output_file_name_value = null;
-		output_folder_name_value = null;
-		column_view_value = null;
-		last_updated_value = null;
-		plugin_name_branding_value = null;
-		server_pretext_value = null;
-		plugins_pretext_value = null;
-		css_file_name_value = null;
-		mcl = null;
-		pm = null;
-		pdFile = null;
-		listofplugins = null;
-		nameofplugins = null;
-		prop = null;
 	}
 
 	public void setDefaultSettings() {

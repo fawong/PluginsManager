@@ -14,14 +14,20 @@ import java.io.BufferedWriter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.entity.Player;
 
 /**
 * Handle events for all in-game commands
 * @author fawong
 */
-public class ListPluginsCommand extends PluginsManager implements CommandExecutor, PluginsManagerSettings{
+public class ListPluginsCommand implements CommandExecutor, PluginsManagerSettings{
+	private String output_file_name_value = "";
+	private String output_folder_name_value = "";
+	private String column_view_value = "";
+	private String last_updated_value = "";
+	private String plugin_name_branding_value = "";
+	private String server_pretext_value = "";
+	private String plugins_pretext_value = "";
+	private String css_file_name_value = "";
 	private final PluginsManager plugin;
 
 	public ListPluginsCommand(PluginsManager instance) {
