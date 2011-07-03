@@ -13,9 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 import org.bukkit.Server;
-import org.bukkit.event.Event.Priority;
-import org.bukkit.event.Event.Type;
-import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -65,7 +62,7 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 			if (lp.loadListPluginSettings()) {
 				mcl.log(Level.INFO, pluginMessageString("Settings have been successfully loaded"));
 			} else {
-				mcl.log(Level.SEVERE, pluginMessageString("Please configure the " + config_file_name + " file and reload the plugin"));
+				mcl.log(Level.WARNING, pluginMessageString("Please configure the " + config_file_name + " file and reload the plugin"));
 			}
 		}
 	}
@@ -82,11 +79,15 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 		try {
 			prop.load(new FileInputStream(config_file));
 			toggle_value = prop.getProperty(toggle);
-			toggle_value = toggle_value.trim().toLowerCase();
-			if (toggle_value.equals("off")) {
-				return true;
+			if (toggle_value == null) {
+				throw new IOException();
 			} else {
-				return false;
+				toggle_value = toggle_value.trim().toLowerCase();
+				if(toggle_value.equals("off")) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 		} catch(IOException ioe) {
 			setDefaultSettings();
@@ -94,7 +95,7 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 		}
 	}
 
-	private void setDefaultSettings() {
+	protected void setDefaultSettings() {
 		prop.setProperty(toggle, toggle_default_value);
 		prop.setProperty(output_folder_name, output_folder_name_default_value);
 		prop.setProperty(output_file_name, output_file_name_default_value);

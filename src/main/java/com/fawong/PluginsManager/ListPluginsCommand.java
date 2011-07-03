@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
 
 /**
-* Handle events for all in-game commands
+* Handle events for all lp and listplugins in-game commands
 * @author fawong
 */
 public class ListPluginsCommand implements CommandExecutor, PluginsManagerSettings {

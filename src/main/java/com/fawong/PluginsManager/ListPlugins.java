@@ -15,7 +15,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.Plugin;
 
 /**
-* Handle events for all in-game commands
+* Handle events for listing plugins to a file
 * @author fawong
 */
 public class ListPlugins implements PluginsManagerSettings{
@@ -50,12 +50,22 @@ public class ListPlugins implements PluginsManagerSettings{
 			column_view_value == null || last_updated_value == null || plugin_name_branding_value == null ||
 			server_pretext_value == null || plugins_pretext_value == null || css_file_name_value == null) {
 				mcl.log(Level.SEVERE, plugin.pluginMessageString(config_file_name + " file is not in the proper format"));
+				plugin.setDefaultSettings();
 				return false;
 			} else {
 				mcl.log(Level.INFO, plugin.pluginMessageString(config_file_name + " file successfully loaded"));
 				column_view_value = column_view_value.trim().toLowerCase();
 				last_updated_value = last_updated_value.trim().toLowerCase();
 				plugin_name_branding_value = plugin_name_branding_value.trim().toLowerCase();
+			System.out.println(output_folder_name_value);
+			System.out.println(output_file_name_value);
+			System.out.println("\n\n\n\n\n\n\n\n");
+				output_folder_name_value = output_folder_name_value.replace("\\", "/");
+				css_file_name_value = css_file_name_value.replace("\\", "/");
+			System.out.println(output_folder_name_value);
+			System.out.println(output_file_name_value);
+			System.out.println("\n\n\n\n\n\n\n\n");
+				listPluginsToFile();
 				return true;
 			}
 		} catch (IOException ioe) {
@@ -130,6 +140,9 @@ public class ListPlugins implements PluginsManagerSettings{
 		printtofile += "</body>\n";
 		printtofile += "</html>\n";
 		try {
+			System.out.println(output_folder_name_value);
+			System.out.println(output_file_name_value);
+			System.out.println("\n\n\n\n\n\n\n\n");
 			File file_to_output = new File(output_folder_name_value, output_file_name_value);
 			FileWriter fw = new FileWriter(file_to_output);
 			BufferedWriter out = new BufferedWriter(fw);
