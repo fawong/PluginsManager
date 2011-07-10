@@ -31,10 +31,10 @@ public class ListPluginsCommand implements CommandExecutor, PluginsManagerSettin
 				for (int i = 0; i < fpn.length; i++) {
 					if (i < fpn.length - 1) {
 						if (col) {
-							sendstring = sendstring + fpn[i] + "\n";
+							sendstring += fpn[i] + "\n";
 						}
 						else if (row) {
-							sendstring = sendstring + fpn[i] + ", ";
+							sendstring += fpn[i] + ", ";
 						} else {
 							mcl.log(Level.SEVERE, "This should not happen.");
 						}

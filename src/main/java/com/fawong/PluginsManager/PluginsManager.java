@@ -27,7 +27,7 @@ import org.bukkit.command.Command;
 * @author fawong
 */
 public class PluginsManager extends JavaPlugin implements PluginsManagerSettings {
-	private String toggle_value = "";
+	private String toggle_name_value = "";
 	private Logger mcl = Logger.getLogger("Minecraft");
 	private PluginManager pm;
 	private PluginDescriptionFile pdFile;
@@ -48,9 +48,10 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 		mcl.log(Level.INFO, pluginMessageString(pdFile.getName() + " version " + pdFile.getVersion() + " enabled"));
 
 		// Set Executor file to use
+		getCommand("pluginsmanager").setExecutor(new PMgrCommand(this));
 		getCommand("pmgr").setExecutor(new PMgrCommand(this));
-		getCommand("lp").setExecutor(new ListPluginsCommand(this));
 		getCommand("listplugins").setExecutor(new ListPluginsCommand(this));
+		getCommand("lp").setExecutor(new ListPluginsCommand(this));
 
 		// Call method to list plugins to a file.
 		if (pluginToggleOff()) {
@@ -78,12 +79,12 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 	private boolean pluginToggleOff() {
 		try {
 			prop.load(new FileInputStream(config_file));
-			toggle_value = prop.getProperty(toggle);
-			if (toggle_value == null) {
+			toggle_name_value = prop.getProperty(toggle_name);
+			if (toggle_name_value == null) {
 				throw new IOException();
 			} else {
-				toggle_value = toggle_value.trim().toLowerCase();
-				if(toggle_value.equals("off")) {
+				toggle_name_value = toggle_name_value.trim().toLowerCase();
+				if(toggle_name_value.equals("off")) {
 					return true;
 				} else {
 					return false;
@@ -96,15 +97,16 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 	}
 
 	protected void setDefaultSettings() {
-		prop.setProperty(toggle, toggle_default_value);
+		prop.setProperty(toggle_name, toggle_name_default_value);
 		prop.setProperty(output_folder_name, output_folder_name_default_value);
 		prop.setProperty(output_file_name, output_file_name_default_value);
-		prop.setProperty(column_view, column_view_default_value);
-		prop.setProperty(last_updated, last_updated_default_value);
-		prop.setProperty(plugin_name_branding, plugin_name_branding_default_value);
-		prop.setProperty(server_pretext, server_pretext_default_value);
-		prop.setProperty(plugins_pretext, plugins_pretext_default_value);
+		prop.setProperty(column_view_name, column_view_name_default_value);
+		prop.setProperty(last_updated_name, last_updated_name_default_value);
+		prop.setProperty(plugin_name_branding_name, plugin_name_branding_name_default_value);
+		prop.setProperty(server_pretext_name, server_pretext_name_default_value);
+		prop.setProperty(plugins_pretext_name, plugins_pretext_name_default_value);
 		prop.setProperty(css_file_name, css_file_name_default_value);
+		prop.setProperty(alphabetize_plugin_name, alphabetize_plugin_name_default_value);
 		File config_folder = new File(config_folder_name);
 		try {
 			if (!config_folder.exists()) {
