@@ -2,6 +2,7 @@ package com.fawong.PluginsManager;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Arrays;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
@@ -27,11 +28,14 @@ public class ListPluginsCommand implements CommandExecutor, PluginsManagerSettin
 			boolean row = args[0].equalsIgnoreCase("row");
 			if (col || row) {
 				String[] fpn = lp.getFullPluginNames();
+				if (lp.alphabetize_plugin_name_value.equalsIgnoreCase("on")) {
+					Arrays.sort(fpn, String.CASE_INSENSITIVE_ORDER);
+				}
 				String sendstring = "";
 				for (int i = 0; i < fpn.length; i++) {
 					if (i < fpn.length - 1) {
 						if (col) {
-							sendstring += fpn[i] + "\n";
+							sender.sendMessage(fpn[i]);
 						}
 						else if (row) {
 							sendstring += fpn[i] + ", ";
@@ -40,9 +44,9 @@ public class ListPluginsCommand implements CommandExecutor, PluginsManagerSettin
 						}
 					} else {
 						sendstring += fpn[i];
+						sender.sendMessage(sendstring);
 					}
 				}
-				sender.sendMessage(sendstring);
 				return true;
 			} else {
 				sender.sendMessage(plugin.pluginMessageString("You must specify either \"column\" or \"row\""));

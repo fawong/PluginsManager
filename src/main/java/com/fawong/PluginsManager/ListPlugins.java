@@ -28,7 +28,7 @@ public class ListPlugins implements PluginsManagerSettings{
 	private String server_pretext_name_value = "";
 	private String plugins_pretext_name_value = "";
 	private String css_file_name_value = "";
-	private String alphabetize_plugin_name_value = "";
+	protected String alphabetize_plugin_name_value = "";
 	private final PluginsManager plugin;
 	private Plugin[] listofplugins;
 	private String[] nameofplugins;
@@ -89,7 +89,7 @@ public class ListPlugins implements PluginsManagerSettings{
 		String returnstring = "";
 		nameofplugins = getFullPluginNames();
 		if (apnv.equalsIgnoreCase("on")) {
-			Arrays.sort(nameofplugins);
+			Arrays.sort(nameofplugins, String.CASE_INSENSITIVE_ORDER);
 		}
 		for (int j = 0; j < nameofplugins.length; j++) {
 			if (j < nameofplugins.length - 1) {
