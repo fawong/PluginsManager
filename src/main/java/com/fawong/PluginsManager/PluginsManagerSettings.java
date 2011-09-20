@@ -35,6 +35,8 @@ public interface PluginsManagerSettings {
 	String css_file_name_default_value = "CHANGE THIS VALUE";
 	String alphabetize_plugin_name = "alphabetize_plugin";
 	String alphabetize_plugin_name_default_value = "on";
+        String background_image_file_name = "background_image_file_name";
+        String background_image_file_name_default_value = "CHANGE THIS VALUE";
 	HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
 	Logger mcl = Logger.getLogger("Minecraft");
 	File config_file = new File(config_folder_name, config_file_name);

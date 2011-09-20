@@ -28,6 +28,7 @@ public class ListPlugins implements PluginsManagerSettings{
 	private String server_pretext_name_value = "";
 	private String plugins_pretext_name_value = "";
 	private String css_file_name_value = "";
+        private String background_image_file_name_value = "";
 	protected String alphabetize_plugin_name_value = "";
 	private final PluginsManager plugin;
 	private Plugin[] listofplugins;
@@ -49,10 +50,11 @@ public class ListPlugins implements PluginsManagerSettings{
 			plugins_pretext_name_value = prop.getProperty(plugins_pretext_name);
 			css_file_name_value = prop.getProperty(css_file_name);
 			alphabetize_plugin_name_value = prop.getProperty(alphabetize_plugin_name);
+                        background_image_file_name_value = prop.getProperty(background_image_file_name);
 			if (output_folder_name_value == null || output_file_name_value == null ||
 			column_view_name_value == null || last_updated_name_value == null || plugin_name_branding_name_value == null ||
 			server_pretext_name_value == null || plugins_pretext_name_value == null || css_file_name_value == null ||
-			alphabetize_plugin_name_value == null) {
+			alphabetize_plugin_name_value == null || background_image_file_name_value == null) {
 				mcl.log(Level.SEVERE, plugin.pluginMessageString(config_file_name + " file is not in the proper format"));
 				plugin.setDefaultSettings();
 				return false;
@@ -133,7 +135,11 @@ public class ListPlugins implements PluginsManagerSettings{
 		}
 		printtofile += "<title>" + plugin.getServer().getName() + "</title>\n";
 		printtofile += "</head>\n";
-		printtofile += "<body>\n";
+                if (background_image_file_name_value.length() != 0) {
+                        printtofile += "<body background=\"" + background_image_file_name_value + "\">\n";
+                } else {
+                        printtofile += "<body>\n";
+                }
 		printtofile += "<strong>" + server_pretext_name_value + "</strong><br />\n" + plugin.getServer().getVersion() + "\n<br /><br />\n";
 		printtofile += "<strong>" + plugins_pretext_name_value + "</strong><br />\n";
 		printtofile += listFullPluginNames(column_view_name_value, alphabetize_plugin_name_value);

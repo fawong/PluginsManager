@@ -107,6 +107,7 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
 		prop.setProperty(plugins_pretext_name, plugins_pretext_name_default_value);
 		prop.setProperty(css_file_name, css_file_name_default_value);
 		prop.setProperty(alphabetize_plugin_name, alphabetize_plugin_name_default_value);
+                prop.setProperty(background_image_file_name, background_image_file_name_default_value);
 		File config_folder = new File(config_folder_name);
 		try {
 			if (!config_folder.exists()) {

@@ -1,11 +1,9 @@
 name: PluginsManager
 main: com.fawong.PluginsManager.PluginsManager
-version: 11.07.11
+version: 11.09.20
 website: http://fawong.com/
 author: FAWONG
-description: >
-             Helps manage plugins installed on the server
-             Various plugin and server related additions
+description: Various plugin and server related additions
 commands:
   lp:
     description: Lists plugins in several different formats
@@ -24,3 +22,8 @@ commands:
   pmgr:
     description: alias for /<command>
     usage: /<command>
+permissions:
+    pluginsmanager.*:
+        description: Gives access to all pluginsmanager commands
+        children:
+            pluginsmanager.enable: true
