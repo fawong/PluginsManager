@@ -50,6 +50,7 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
     // Set Executor file to use
     getCommand("pluginsmanager").setExecutor(new PMgrCommand(this));
     getCommand("pmgr").setExecutor(new PMgrCommand(this));
+    getCommand("plm").setExecutor(new PMgrCommand(this));
     getCommand("listplugins").setExecutor(new ListPluginsCommand(this));
     getCommand("lp").setExecutor(new ListPluginsCommand(this));
 

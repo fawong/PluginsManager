@@ -1,27 +1,27 @@
 name: PluginsManager
 main: com.fawong.PluginsManager.PluginsManager
-version: 12.05.06
-website: http://fawong.com/
+version: 12.12.10
+website: https://fawong.com/
 author: FAWONG
 description: Various plugin and server related additions
 commands:
   lp:
     description: Lists plugins in several different formats
     usage: |
-           /<command> <display type>
-           Example: /<command> row
-           Example: /<command> column
+           /lp <display type>
+           Example: /lp row
+           Example: /lp column
   listplugins:
     aliases: [lp]
-    description: alias for /<command>
-    usage: /<command>
+    description: alias for /listplugins
+    usage: /listplugins
   pluginsmanager:
     aliases: [pmgr]
     description: manage plugins
-    usage: /<command>
+    usage: /pluginsmanager
   pmgr:
-    description: alias for /<command>
-    usage: /<command>
+    description: alias for /pluginsmanager
+    usage: /pmgr
 permissions:
     pluginsmanager.*:
         description: Gives access to all pluginsmanager commands

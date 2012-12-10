@@ -29,13 +29,13 @@ public class PMgrCommand implements CommandExecutor, PluginsManagerSettings {
     player.sendMessage("poke");
     if (args[0].equalsIgnoreCase("disable")) {
       pm.disablePlugin(pm.getPlugin(args[1]));
-    player.sendMessage("Disabled" + args[1]);
+      player.sendMessage("Disabled" + args[1]);
     }
     else if (args[0].equalsIgnoreCase("enable")) {
       pm.enablePlugin(pm.getPlugin(args[1]));
-    player.sendMessage("Enabled" + args[1]);
+      player.sendMessage("Enabled" + args[1]);
     }
-  System.out.println("poke");
-  return true;
+    System.out.println("poke");
+    return true;
   }
 }
