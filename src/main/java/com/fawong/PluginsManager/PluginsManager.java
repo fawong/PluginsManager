@@ -20,6 +20,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.Command;
+import org.mcstats.Metrics;
 
 /**
  * PluginsManager for Bukkit Minecraft Server
@@ -39,6 +40,14 @@ public class PluginsManager extends JavaPlugin implements PluginsManagerSettings
   }
 
   public void onEnable() {
+    // Start metrics
+    try {
+      Metrics metrics = new Metrics(this);
+      metrics.start();
+    } catch (IOException e) {
+        // Failed to submit the stats :-(
+    }
+
     // Custom enable code here including the registration of any events
     // Register events
     pm = getServer().getPluginManager();

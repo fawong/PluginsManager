@@ -19,6 +19,9 @@ commands:
     aliases: [pmgr]
     description: manage plugins
     usage: /pluginsmanager
+  plm:
+    description: alias for /pluginsmanager
+    usage: /plm
   pmgr:
     description: alias for /pluginsmanager
     usage: /pmgr
