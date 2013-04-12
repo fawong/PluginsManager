@@ -1,7 +1,7 @@
 name: PluginsManager
 main: com.fawong.PluginsManager.PluginsManager
-version: 12.12.10
-website: https://fawong.com/
+version: 13.04.11
+website: http://fawong.com/
 author: FAWONG
 description: Various plugin and server related additions
 commands:
