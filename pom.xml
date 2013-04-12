@@ -4,7 +4,7 @@
   <groupId>com.fawong.PluginsManager</groupId>
   <artifactId>PluginsManager</artifactId>
   <packaging>jar</packaging>
-  <version>13.04.11</version>
+  <version>13.04.12</version>
   <name>PluginsManager</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -27,27 +27,14 @@
         <version>R6</version>
         <scope>compile</scope>
     </dependency>
-  </dependencies>
-  <build>
-    <plugins>
-     <plugin>
+    <dependency>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-shade-plugin</artifactId>
       <version>1.4</version>
-      <configuration>
-       <source>1.6</source>
-       <target>1.6</target>
-      </configuration>
-      <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
-     </plugin>
-    </plugins>
+        <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <build>
   <resources>
     <resource>
       <filtering>false</filtering>
