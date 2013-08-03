@@ -25,17 +25,27 @@ public class PMgrCommand implements CommandExecutor, PluginsManagerSettings {
   // Command related code here
   @Override
   public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-    Player player = (Player) sender;
-    player.sendMessage("poke");
-    if (args[0].equalsIgnoreCase("disable")) {
-      pm.disablePlugin(pm.getPlugin(args[1]));
-      player.sendMessage("Disabled" + args[1]);
+    Player player = null;
+    try {
+      player = (Player) sender;
+    } catch (ClassCastException cce) {
+      System.err.println("pokepoke");
+      return false;
     }
-    else if (args[0].equalsIgnoreCase("enable")) {
-      pm.enablePlugin(pm.getPlugin(args[1]));
-      player.sendMessage("Enabled" + args[1]);
+
+    if (args.length > 1) {
+      if (args[0].equalsIgnoreCase("disable")) {
+        pm.disablePlugin(pm.getPlugin(args[1]));
+        player.sendMessage("Disabled" + args[1]);
+      }
+      else if (args[0].equalsIgnoreCase("enable")) {
+        pm.enablePlugin(pm.getPlugin(args[1]));
+        player.sendMessage("Enabled" + args[1]);
+      }
+      System.out.println("poke");
+      return true;
+    } else {
+      return false;
     }
-    System.out.println("poke");
-    return true;
   }
 }
