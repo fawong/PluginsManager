@@ -13,7 +13,7 @@ import org.bukkit.Server;
  * Handle events for all pmgr commands
  * @author fawong
  */
-public class PMgrCommand implements CommandExecutor, PluginsManagerSettings {
+public class PMgrCommand implements CommandExecutor {
   private final PluginsManager plugin;
   private PluginManager pm;
 
@@ -29,7 +29,6 @@ public class PMgrCommand implements CommandExecutor, PluginsManagerSettings {
     try {
       player = (Player) sender;
     } catch (ClassCastException cce) {
-      System.err.println("pokepoke");
       return false;
     }
 
@@ -42,7 +41,6 @@ public class PMgrCommand implements CommandExecutor, PluginsManagerSettings {
         pm.enablePlugin(pm.getPlugin(args[1]));
         player.sendMessage("Enabled" + args[1]);
       }
-      System.out.println("poke");
       return true;
     } else {
       return false;

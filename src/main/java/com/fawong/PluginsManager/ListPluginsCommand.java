@@ -11,7 +11,7 @@ import org.bukkit.command.CommandExecutor;
  * Handle events for all lp and listplugins in-game commands
  * @author fawong
  */
-public class ListPluginsCommand implements CommandExecutor, PluginsManagerSettings {
+public class ListPluginsCommand implements CommandExecutor {
   private final PluginsManager plugin;
   private final ListPlugins lp; 
 
@@ -29,7 +29,7 @@ public class ListPluginsCommand implements CommandExecutor, PluginsManagerSettin
       boolean row = args[0].equalsIgnoreCase("row");
       if (col || row) {
         String[] fpn = lp.getFullPluginNames();
-        if (lp.alphabetize_plugin_name_value.equalsIgnoreCase("on")) {
+        if (plugin.getConfig().getBoolean("alphabetize_plugin") == true) {
           Arrays.sort(fpn, String.CASE_INSENSITIVE_ORDER);
         }
         String sendstring = "";
@@ -41,7 +41,7 @@ public class ListPluginsCommand implements CommandExecutor, PluginsManagerSettin
             else if (row) {
               sendstring += fpn[i] + ", ";
             } else {
-              mcl.log(Level.SEVERE, "This should not happen.");
+              plugin.getLogger().log(Level.SEVERE, "This should not happen.");
             }
           } else {
             sendstring += fpn[i];
