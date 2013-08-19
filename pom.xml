@@ -4,10 +4,16 @@
   <groupId>com.fawong.PluginsManager</groupId>
   <artifactId>PluginsManager</artifactId>
   <packaging>jar</packaging>
-  <version>13.08.03</version>
+  <version>13.08.19</version>
   <name>PluginsManager</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>2.3.20</version>
+      <scope>compile</scope>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -17,7 +23,7 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.6.2-R0.1-SNAPSHOT</version>
+      <version>1.6.2-R0.2-SNAPSHOT</version>
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
@@ -35,12 +41,37 @@
     </dependency>
   </dependencies>
   <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>1.3</version>
+        <configuration>
+          <artifactSet>
+            <includes>
+              <include>org.mcstats.*</include>
+              <include>org.freemarker</include>
+              <include>com.fawong.*</include>
+            </includes>
+          </artifactSet>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   <resources>
     <resource>
       <filtering>false</filtering>
         <directory>${basedir}/src</directory>
           <includes>
             <include>plugin.yml</include>
+            <include>config.yml</include>
           </includes>
         </resource>
       </resources>
