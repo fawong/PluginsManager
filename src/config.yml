@@ -1,12 +1,13 @@
+toggle: true
 alphabetize-plugin: true
-background-image-file-name: CHANGE THIS VALUE
 column-view: true
-css-file-name: CHANGE THIS VALUE
 last-updated: true
-output-file-name: test.html
-output-folder-name: /tmp
-plugin-name-branding: false
+plugin-name-branding: true
+background-image-file-name: CHANGE THIS VALUE
+css-file-name: CHANGE THIS VALUE
+output-file-name: default
+output-file-location: default
 plugins-pretext: This server uses the following plugins
 server-pretext: This server runs
-template-file-location: /tmp/z.template
-toggle: true
+template-file-name: default
+template-file-location: default

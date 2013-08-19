@@ -1,31 +1,21 @@
 package com.fawong.PluginsManager;
 
-import freemarker.template.TemplateExceptionHandler;
-import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Version;
-import freemarker.template.Template;
-import freemarker.template.Configuration;
 import java.io.File;
-import java.io.OutputStream;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
 import java.util.HashMap;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.bukkit.entity.Player;
-import org.bukkit.Server;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.Command;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
+
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.TemplateExceptionHandler;
+import freemarker.template.Version;
 
 /**
  * PluginsManager for Bukkit Minecraft Server
@@ -38,21 +28,12 @@ public class PluginsManager extends JavaPlugin {
   private PluginDescriptionFile pdFile;
   private ListPlugins lp = new ListPlugins(this);
   private HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
+  private File customConfigFile = null; 
   public static Configuration cfg = new Configuration();
 
   public PluginsManager() {
     // Custom initialisation code here
     // NOTE: Event registration should be done in onEnable not here as all events are unregistered when a plugin is disabled
-    try {
-      cfg.setDirectoryForTemplateLoading(new File("/tmp/"));
-      cfg.setObjectWrapper(new DefaultObjectWrapper());
-      cfg.setDefaultEncoding("UTF-8");
-      cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
-      //cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-      cfg.setIncompatibleImprovements(new Version(2, 3, 20));
-    } catch (IOException ioe) {
-      mcl.log(Level.SEVERE, pluginMessageString("THIS IS NOT GOOD"));
-    }
   }
 
   public void onEnable() {
@@ -61,7 +42,7 @@ public class PluginsManager extends JavaPlugin {
       Metrics metrics = new Metrics(this);
       metrics.start();
     } catch (IOException e) {
-        // Failed to submit the stats :-(
+      // Failed to submit the stats :-(
     }
 
     // Custom enable code here including the registration of any events
@@ -80,6 +61,22 @@ public class PluginsManager extends JavaPlugin {
     getCommand("lp").setExecutor(new ListPluginsCommand(this));
 
     saveDefaultConfig();
+    saveDefaultTemplateConfig();
+    try {
+      String template_file_location = getConfig().getString("template-file-location");
+      if (template_file_location.equals("default")) {
+        template_file_location = getDataFolder().getAbsolutePath();
+      }
+      cfg.setDirectoryForTemplateLoading(new File(template_file_location));
+      cfg.setObjectWrapper(new DefaultObjectWrapper());
+      cfg.setDefaultEncoding("UTF-8");
+      cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
+      //cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+      cfg.setIncompatibleImprovements(new Version(2, 3, 20));
+    } catch (IOException ioe) {
+      mcl.log(Level.SEVERE, pluginMessageString("THIS IS NOT GOOD"));
+    }
+
     if (getConfig().getBoolean("toggle") == false) {
       mcl.log(Level.INFO, pluginMessageString("Toggle value off"));
       mcl.log(Level.INFO, pluginMessageString("Plugin will be disabled"));
@@ -104,8 +101,17 @@ public class PluginsManager extends JavaPlugin {
     pm.disablePlugin(this);
   }
 
+  public void saveDefaultTemplateConfig() {
+    if (customConfigFile == null) {
+      customConfigFile = new File(getDataFolder(), "html.template");
+    }
+    if (!customConfigFile.exists()) {            
+      saveResource("html.template", false);
+    }
+  }
+
   protected String pluginMessageString(String s) {
-    return "[PluginsManager] " + s;
+    return "11111111111111[PluginsManager] " + s;
   }
 
   public boolean isDebugging(final Player player) {
