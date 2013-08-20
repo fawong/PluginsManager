@@ -23,9 +23,9 @@ import freemarker.template.Version;
  * @author fawong
  */
 public class PluginsManager extends JavaPlugin {
+  //private PluginDescriptionFile pdFile;
   private Logger mcl = Logger.getLogger("Minecraft");
   private PluginManager pm;
-  private PluginDescriptionFile pdFile;
   private ListPlugins lp = new ListPlugins(this);
   private HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
   private File defaultTemplateFile = null;
@@ -51,7 +51,7 @@ public class PluginsManager extends JavaPlugin {
     pm = getServer().getPluginManager();
 
     // EXAMPLE: Custom code, here we just output some info so we can check all is well
-    pdFile = getDescription();
+    //pdFile = getDescription();
     //mcl.log(Level.INFO, pdFile.getName() + " version " + pdFile.getVersion() + " enabled");
 
     // Set Executor file to use
