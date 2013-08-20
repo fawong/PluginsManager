@@ -28,8 +28,8 @@ public class PluginsManager extends JavaPlugin {
   private PluginDescriptionFile pdFile;
   private ListPlugins lp = new ListPlugins(this);
   private HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
-  private File customConfigFile = null; 
-  public static Configuration cfg = new Configuration();
+  private File defaultTemplateFile = null;
+  protected static Configuration cfg = new Configuration();
 
   public PluginsManager() {
     // Custom initialisation code here
@@ -42,7 +42,8 @@ public class PluginsManager extends JavaPlugin {
       Metrics metrics = new Metrics(this);
       metrics.start();
     } catch (IOException e) {
-      // Failed to submit the stats :-(
+      e.printStackTrace();
+      // Failed to submit the stats :(
     }
 
     // Custom enable code here including the registration of any events
@@ -51,7 +52,7 @@ public class PluginsManager extends JavaPlugin {
 
     // EXAMPLE: Custom code, here we just output some info so we can check all is well
     pdFile = getDescription();
-    mcl.log(Level.INFO, pluginMessageString(pdFile.getName() + " version " + pdFile.getVersion() + " enabled"));
+    //mcl.log(Level.INFO, pdFile.getName() + " version " + pdFile.getVersion() + " enabled");
 
     // Set Executor file to use
     getCommand("pluginsmanager").setExecutor(new PMgrCommand(this));
@@ -60,8 +61,26 @@ public class PluginsManager extends JavaPlugin {
     getCommand("listplugins").setExecutor(new ListPluginsCommand(this));
     getCommand("lp").setExecutor(new ListPluginsCommand(this));
 
-    saveDefaultConfig();
-    saveDefaultTemplateConfig();
+    final File configFile = new File(getDataFolder().getAbsolutePath(), "config.yml");
+    final File templateFile = new File(getDataFolder().getAbsolutePath(), "html.template");
+    if (!configFile.exists()) {
+      saveDefaultConfig();
+      mcl.log(Level.WARNING, "Please configure the " + configFile.getName() + " file and reload the plugin");
+      pm.disablePlugin(this);
+      return;
+    }
+
+    if (!templateFile.exists()) {
+      saveDefaultTemplateConfig();
+      mcl.log(Level.WARNING, "Please configure the " + templateFile.getName() + " file and reload the plugin");
+    }
+
+    if (getConfig().getBoolean("toggle") == false) {
+      mcl.log(Level.INFO, "Toggle value off, plugin will be disabled");
+      pm.disablePlugin(this);
+      return;
+    }
+
     try {
       String template_file_location = getConfig().getString("template-file-location");
       if (template_file_location.equals("default")) {
@@ -73,22 +92,11 @@ public class PluginsManager extends JavaPlugin {
       cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
       //cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
       cfg.setIncompatibleImprovements(new Version(2, 3, 20));
-    } catch (IOException ioe) {
-      mcl.log(Level.SEVERE, pluginMessageString("THIS IS NOT GOOD"));
-    }
 
-    if (getConfig().getBoolean("toggle") == false) {
-      mcl.log(Level.INFO, pluginMessageString("Toggle value off"));
-      mcl.log(Level.INFO, pluginMessageString("Plugin will be disabled"));
-      pm.disablePlugin(this);
-      return;
-    } else {
-      if (getConfig().getBoolean("toggle") == true) {
-        mcl.log(Level.INFO, pluginMessageString("Settings have been successfully loaded"));
-        lp.listPluginsToFile();
-      } else {
-        mcl.log(Level.WARNING, pluginMessageString("Please configure the config.yml file and reload the plugin"));
-      }
+      lp.listPluginsToFile();
+    } catch (IOException ioe) {
+      mcl.log(Level.SEVERE, "Could not set directory for template: " + ioe);
+      ioe.printStackTrace();
     }
   }
 
@@ -96,22 +104,18 @@ public class PluginsManager extends JavaPlugin {
     // NOTE: All registered events are automatically unregistered when a plugin is disabled
     // Custom disable code here
     // EXAMPLE: Custom code, here we just output some info so we can check all is well
-    pdFile = getDescription();
-    mcl.log(Level.INFO, pluginMessageString(pdFile.getName() + " version " + pdFile.getVersion() + " disabled"));
+    //pdFile = getDescription();
+    //mcl.log(Level.INFO, pdFile.getName() + " version " + pdFile.getVersion() + " disabled");
     pm.disablePlugin(this);
   }
 
   public void saveDefaultTemplateConfig() {
-    if (customConfigFile == null) {
-      customConfigFile = new File(getDataFolder(), "html.template");
+    if (defaultTemplateFile == null) {
+      defaultTemplateFile = new File(getDataFolder().getAbsolutePath(), "html.template");
     }
-    if (!customConfigFile.exists()) {            
+    if (!defaultTemplateFile.exists()) {
       saveResource("html.template", false);
     }
-  }
-
-  protected String pluginMessageString(String s) {
-    return "11111111111111[PluginsManager] " + s;
   }
 
   public boolean isDebugging(final Player player) {

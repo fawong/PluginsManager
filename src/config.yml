@@ -1,11 +1,14 @@
 toggle: true
 alphabetize-plugin: true
 column-view: true
-background-image-file-name: CHANGE THIS VALUE
+
 css-file-name: CHANGE THIS VALUE
-output-file-name: default
-output-file-location: default
+background-image-file-name: CHANGE THIS VALUE
 plugins-pretext: This server uses the following plugins
 server-pretext: This server runs
-template-file-name: default
+
 template-file-location: default
+template-file-name: default
+
+output-file-location: default
+output-file-name: default

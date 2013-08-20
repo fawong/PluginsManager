@@ -13,7 +13,7 @@ import org.bukkit.command.CommandExecutor;
  */
 public class ListPluginsCommand implements CommandExecutor {
   private final PluginsManager plugin;
-  private final ListPlugins lp; 
+  private final ListPlugins lp;
 
   public ListPluginsCommand(PluginsManager instance) {
     plugin = instance;
@@ -50,11 +50,11 @@ public class ListPluginsCommand implements CommandExecutor {
         }
         return true;
       } else {
-        sender.sendMessage(plugin.pluginMessageString("You must specify either \"column\" or \"row\""));
+        sender.sendMessage("You must specify either \"column\" or \"row\"");
         return true;
       }
     } else {
-      sender.sendMessage(plugin.pluginMessageString("You must specify either \"column\" or \"row\""));
+      sender.sendMessage("You must specify either \"column\" or \"row\"");
       return true;
     }
   }

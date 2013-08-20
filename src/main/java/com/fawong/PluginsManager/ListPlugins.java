@@ -67,17 +67,15 @@ public class ListPlugins {
       template_file = PluginsManager.cfg.getTemplate(template_file_name);
 
       HashMap<String, String> root = new HashMap<String, String>();
-      root.put("backgroundimagefilename", plugin.getConfig().getString("background-image-file-name"));
       root.put("servername", plugin.getServer().getName());
+      root.put("serverversion", plugin.getServer().getVersion());
       root.put("cssfilename", plugin.getConfig().getString("css-file-name"));
       root.put("serverpretext", plugin.getConfig().getString("server-pretext"));
-      root.put("serverversion", plugin.getServer().getVersion());
       root.put("pluginspretext", plugin.getConfig().getString("plugins-pretext"));
-      root.put("plugins", listFullPluginNames(plugin.getConfig().getBoolean("column-view"), plugin.getConfig().getBoolean("alphabetize-plugin")));
-      Date date = new Date();
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd @ HH:mm:ss");
-      root.put("lastupdated", "This page was generated on: " + sdf.format(date));
+      root.put("backgroundimagefilename", plugin.getConfig().getString("background-image-file-name"));
       root.put("pluginnamebranding", "Using " + plugin.getDescription().getFullName());
+      root.put("plugins", listFullPluginNames(plugin.getConfig().getBoolean("column-view"), plugin.getConfig().getBoolean("alphabetize-plugin")));
+      root.put("lastupdated", "This page was generated on: " + (new SimpleDateFormat("yyyy/MM/dd @ HH:mm:ss")).format(new Date()));
 
       String output_file_location = plugin.getConfig().getString("output-file-location");
       if (output_file_location.equals("default")) {
@@ -92,13 +90,17 @@ public class ListPlugins {
       try {
         out = new FileWriter(file_to_output);
         template_file.process(root, out);
+        plugin.getLogger().log(Level.INFO, "Successfully written output to " + file_to_output.getAbsolutePath());
       } catch (IOException ioe) {
-        plugin.getLogger().log(Level.SEVERE, plugin.pluginMessageString("Could not open file " + file_to_output.getAbsolutePath() + ": " + ioe));
+        plugin.getLogger().log(Level.SEVERE, "Could not open output file " + file_to_output.getAbsolutePath() + ": " + ioe);
+        ioe.printStackTrace();
       } catch (freemarker.template.TemplateException te) {
-        plugin.getLogger().log(Level.SEVERE, plugin.pluginMessageString("Could not parse template file " + template_file.getName() + ": " + te));
+        plugin.getLogger().log(Level.SEVERE, "Could not parse template file " + template_file.getName() + ": " + te);
+        te.printStackTrace();
       }
     } catch (IOException ioe) {
-      plugin.getLogger().log(Level.SEVERE, plugin.pluginMessageString("Could not open template file " + template_file_name + ": " + ioe));
+      plugin.getLogger().log(Level.SEVERE, "Could not open template file " + template_file_name + ": " + ioe);
+      ioe.printStackTrace();
     }
   }
 }
