@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
@@ -23,7 +22,6 @@ import freemarker.template.Version;
  * @author fawong
  */
 public class PluginsManager extends JavaPlugin {
-  //private PluginDescriptionFile pdFile;
   private Logger mcl = Logger.getLogger("Minecraft");
   private PluginManager pm;
   private ListPlugins lp = new ListPlugins(this);
@@ -46,13 +44,7 @@ public class PluginsManager extends JavaPlugin {
       // Failed to submit the stats :(
     }
 
-    // Custom enable code here including the registration of any events
-    // Register events
     pm = getServer().getPluginManager();
-
-    // EXAMPLE: Custom code, here we just output some info so we can check all is well
-    //pdFile = getDescription();
-    //mcl.log(Level.INFO, pdFile.getName() + " version " + pdFile.getVersion() + " enabled");
 
     // Set Executor file to use
     getCommand("pluginsmanager").setExecutor(new PMgrCommand(this));
@@ -102,10 +94,6 @@ public class PluginsManager extends JavaPlugin {
 
   public void onDisable() {
     // NOTE: All registered events are automatically unregistered when a plugin is disabled
-    // Custom disable code here
-    // EXAMPLE: Custom code, here we just output some info so we can check all is well
-    //pdFile = getDescription();
-    //mcl.log(Level.INFO, pdFile.getName() + " version " + pdFile.getVersion() + " disabled");
     pm.disablePlugin(this);
   }
 

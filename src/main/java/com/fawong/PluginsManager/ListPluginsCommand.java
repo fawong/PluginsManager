@@ -20,8 +20,6 @@ public class ListPluginsCommand implements CommandExecutor {
     lp = new ListPlugins(instance);
   }
 
-  // Command related code here
-
   @Override
   public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
     if (args.length != 0) {
