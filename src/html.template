@@ -15,7 +15,10 @@
 <strong>${serverpretext}</strong><br />${serverversion}<br /><br />
 <strong>${pluginspretext}</strong><br />
 ${plugins}
+<br />
+<br />
 ${lastupdated}
+<br />
 ${pluginnamebranding}
 </body>
 </html>

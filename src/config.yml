@@ -1,8 +1,6 @@
 toggle: true
 alphabetize-plugin: true
 column-view: true
-last-updated: true
-plugin-name-branding: true
 background-image-file-name: CHANGE THIS VALUE
 css-file-name: CHANGE THIS VALUE
 output-file-name: default

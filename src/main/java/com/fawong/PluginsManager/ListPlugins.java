@@ -56,24 +56,6 @@ public class ListPlugins {
     return returnstring;
   }
 
-  private String lastUpdatedDate() {
-    String returnstring = "";
-    if (plugin.getConfig().getBoolean("last-updated") == true) {
-      Date date = new Date();
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd @ HH:mm:ss");   
-      returnstring = "<br /><br /><br /><br />This page was generated on: " + sdf.format(date) + "\n";
-    }
-    return returnstring;
-  }
-
-  private String pluginNameBranding() {
-    String returnstring = "";
-    if (plugin.getConfig().getBoolean("plugin-name-branding") == true) {
-      returnstring += "<br /><br /><br/>Using " + plugin.getDescription().getFullName() + "<br />\n";
-    }
-    return returnstring;
-  }
-
   protected void listPluginsToFile() {
     Template template_file = null;
     String template_file_name = plugin.getConfig().getString("template-file-name");
@@ -85,16 +67,17 @@ public class ListPlugins {
       template_file = PluginsManager.cfg.getTemplate(template_file_name);
 
       HashMap<String, String> root = new HashMap<String, String>();
-      root.put("backgroundimagefilename", "a2w349g89jw349v8423yw");
-      root.put("servername", "3232423");
-      root.put("cssfilename", "WEIGHWIOEGJWE");
-      root.put("backgroundimagefilename", "zzzzzzz");
-      root.put("serverpretext", "aaaaaaa");
-      root.put("serverversion", "5555555");
-      root.put("pluginspretext", "nnnnnnn");
-      root.put("plugins", "rrtrrtr");
-      root.put("lastupdated", "4676758");
-      root.put("pluginnamebranding", "lkagjle");
+      root.put("backgroundimagefilename", plugin.getConfig().getString("background-image-file-name"));
+      root.put("servername", plugin.getServer().getName());
+      root.put("cssfilename", plugin.getConfig().getString("css-file-name"));
+      root.put("serverpretext", plugin.getConfig().getString("server-pretext"));
+      root.put("serverversion", plugin.getServer().getVersion());
+      root.put("pluginspretext", plugin.getConfig().getString("plugins-pretext"));
+      root.put("plugins", listFullPluginNames(plugin.getConfig().getBoolean("column-view"), plugin.getConfig().getBoolean("alphabetize-plugin")));
+      Date date = new Date();
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd @ HH:mm:ss");
+      root.put("lastupdated", "This page was generated on: " + sdf.format(date));
+      root.put("pluginnamebranding", "Using " + plugin.getDescription().getFullName());
 
       String output_file_location = plugin.getConfig().getString("output-file-location");
       if (output_file_location.equals("default")) {

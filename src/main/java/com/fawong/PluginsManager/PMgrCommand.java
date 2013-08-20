@@ -1,5 +1,6 @@
 package com.fawong.PluginsManager;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.command.Command;
@@ -25,25 +26,23 @@ public class PMgrCommand implements CommandExecutor {
   // Command related code here
   @Override
   public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-    Player player = null;
-    try {
-      player = (Player) sender;
-    } catch (ClassCastException cce) {
-      return false;
+    if (args.length >= 2) {
+      String type = args[0];
+      String plugin = args[2];
+    } else {
     }
 
-    if (args.length > 1) {
-      if (args[0].equalsIgnoreCase("disable")) {
-        pm.disablePlugin(pm.getPlugin(args[1]));
-        player.sendMessage("Disabled" + args[1]);
-      }
-      else if (args[0].equalsIgnoreCase("enable")) {
-        pm.enablePlugin(pm.getPlugin(args[1]));
-        player.sendMessage("Enabled" + args[1]);
-      }
-      return true;
-    } else {
-      return false;
+    if (sender instanceof Player) {
+      sender.sendMessage("HI THERE");
+    }
+    return true;
+  }
+
+  private void enableDisablePlugin(String type, String plugin) {
+    if (type.equalsIgnoreCase("disable")) {
+      pm.disablePlugin(pm.getPlugin(plugin));
+    } else if (type.equalsIgnoreCase("enable")) {
+      pm.enablePlugin(pm.getPlugin(plugin));
     }
   }
 }
