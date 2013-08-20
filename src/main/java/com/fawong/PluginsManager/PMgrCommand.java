@@ -26,14 +26,18 @@ public class PMgrCommand implements CommandExecutor {
   // Command related code here
   @Override
   public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+    String type = "";
+    String plugin = "";
+
     if (args.length >= 2) {
-      String type = args[0];
-      String plugin = args[2];
+      type = args[0];
+      plugin = args[1];
+      enableDisablePlugin(type, plugin);
     } else {
     }
 
     if (sender instanceof Player) {
-      sender.sendMessage("HI THERE");
+      sender.sendMessage(type + " " + plugin);
     }
     return true;
   }
@@ -44,5 +48,6 @@ public class PMgrCommand implements CommandExecutor {
     } else if (type.equalsIgnoreCase("enable")) {
       pm.enablePlugin(pm.getPlugin(plugin));
     }
+    this.plugin.getLogger().log(Level.INFO, plugin);
   }
 }
