@@ -1,7 +1,7 @@
 name: PluginsManager
 main: com.fawong.PluginsManager.PluginsManager
-version: 13.08.20
-website: http://fawong.com/
+version: 14.04.25
+website: http://www.fawong.com/minecraft
 author: FAWONG
 description: Various plugin and server related additions
 commands:

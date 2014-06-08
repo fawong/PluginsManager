@@ -4,7 +4,7 @@
   <groupId>com.fawong.PluginsManager</groupId>
   <artifactId>PluginsManager</artifactId>
   <packaging>jar</packaging>
-  <version>13.08.20</version>
+  <version>14.04.25</version>
   <name>PluginsManager</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.6.2-R0.2-SNAPSHOT</version>
+      <version>1.7.9-R0.1-SNAPSHOT</version>
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
@@ -93,7 +93,7 @@
       <name>Felix Wong</name>
       <email>felix@fawong.com</email>
       <organization>FAWONG</organization>
-      <organizationUrl>http://fawong.com</organizationUrl>
+      <organizationUrl>http://www.fawong.com</organizationUrl>
       <roles>
         <role>author</role>
       </roles>
