@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnowxilef%2FPluginsManager.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnowxilef%2FPluginsManager?ref=badge_shield)
+
 name: PluginsManager
 main: com.fawong.PluginsManager.PluginsManager
 version: 14.04.25
@@ -30,3 +32,7 @@ permissions:
         description: Gives access to all pluginsmanager commands
         children:
             pluginsmanager.enable: true
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnowxilef%2FPluginsManager.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnowxilef%2FPluginsManager?ref=badge_large)
