@@ -28,10 +28,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.mcstats.bukkit</groupId>
-      <artifactId>metrics</artifactId>
-      <version>${mcstats.version}</version>
-      <scope>compile</scope>
+      <groupId>org.bstats</groupId>
+      <artifactId>bstats-bukkit</artifactId>
+      <version>${bstats.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.plugins</groupId>
@@ -52,8 +51,16 @@
               <include>org.mcstats.*</include>
               <include>org.freemarker</include>
               <include>com.fawong.*</include>
+              <include>org.bstats:*</include>
             </includes>
           </artifactSet>
+          <relocations>
+            <relocation>
+              <pattern>org.bstats</pattern>
+              <!-- Replace this with your package! -->
+              <shadedPattern>com.fawong.PluginsManager</shadedPattern>
+            </relocation>
+          </relocations>
         </configuration>
         <executions>
           <execution>
@@ -83,8 +90,8 @@
       <url>https://hub.spigotmc.org/nexus/content/repositories/snapshot/</url>
     </repository>
     <repository>
-      <id>Plugin Metrics</id>
-      <url>http://repo.mcstats.org/content/repositories/public</url>
+      <id>bstats-repo</id>
+      <url>http://repo.bstats.org/content/repositories/releases/</url>
     </repository>
   </repositories>
   <developers>
@@ -107,5 +114,6 @@
     <spigot.version>1.12.1-R0.1-SNAPSHOT</spigot.version>
     <mcstats.version>R6</mcstats.version>
     <shade.version>1.4</shade.version>
+    <bstats.version>1.2</bstats.version>
   </properties>
 </project>

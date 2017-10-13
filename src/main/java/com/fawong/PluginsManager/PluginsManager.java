@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
+import org.bstats.bukkit.Metrics;
 
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -36,13 +36,12 @@ public class PluginsManager extends JavaPlugin {
 
   public void onEnable() {
     // Start metrics
-    try {
+    //try {
       Metrics metrics = new Metrics(this);
-      metrics.start();
-    } catch (IOException e) {
-      e.printStackTrace();
-      // Failed to submit the stats :(
-    }
+    //} catch (IOException e) {
+    //  e.printStackTrace();
+    //  // Failed to submit the stats :(
+    //}
 
     pm = getServer().getPluginManager();
 
