@@ -1,10 +1,12 @@
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnowxilef%2FPluginsManager.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnowxilef%2FPluginsManager?ref=badge_shield)
 
-name: PluginsManager
-main: com.fawong.PluginsManager.PluginsManager
-version: 14.04.25
-website: http://www.fawong.com/minecraft
-author: FAWONG
+PluginsManager
+==============
+manipulate plugins in various ways
+
+## General Info
+**version**: {{ version }}
+**website**: http://www.fawong.com/minecraft
 description: Various plugin and server related additions
 commands:
   lp:
@@ -33,6 +35,15 @@ permissions:
         children:
             pluginsmanager.enable: true
 
+## Contributing
+Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the
+process for submitting pull requests to us.
+
+## Author
+Felix Wong (FAWONG)
 
 ## License
+This project is licensed under the GNU General Public License v3.0 License - see the
+[LICENSE](LICENSE) file for details.
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnowxilef%2FPluginsManager.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnowxilef%2FPluginsManager?ref=badge_large)
