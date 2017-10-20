@@ -6,34 +6,16 @@ manipulate plugins in various ways
 
 ## General Info
 **version**: {{ version }}
+
 **website**: http://www.fawong.com/minecraft
-description: Various plugin and server related additions
-commands:
-  lp:
-    description: Lists plugins in several different formats
-    usage: |
-           /lp <display type>
-           Example: /lp row
-           Example: /lp column
-  listplugins:
-    aliases: [lp]
-    description: alias for /listplugins
-    usage: /listplugins
-  pluginsmanager:
-    aliases: [pmgr]
-    description: manage plugins
-    usage: /pluginsmanager
-  plm:
-    description: alias for /pluginsmanager
-    usage: /plm
-  pmgr:
-    description: alias for /pluginsmanager
-    usage: /pmgr
-permissions:
-    pluginsmanager.*:
-        description: Gives access to all pluginsmanager commands
-        children:
-            pluginsmanager.enable: true
+
+**description**: {{ description }}
+
+### commands
+{{ commands }}
+
+### permissions
+{{ permissions }}
 
 ## Contributing
 Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the
