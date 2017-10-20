@@ -7,9 +7,9 @@ manipulate plugins in various ways
 ## General Info
 **version**: 14.04.25
 
-**website**: http://www.fawong.com/minecraft
-
 **description**: Various plugin and server related additions
+
+**website**: http://www.fawong.com/minecraft
 
 ### commands
 ```json
@@ -26,7 +26,7 @@ Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code o
 process for submitting pull requests to us.
 
 ## Author
-Felix Wong (FAWONG)
+FAWONG
 
 ## License
 This project is licensed under the GNU General Public License v3.0 License - see the
