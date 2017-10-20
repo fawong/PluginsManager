@@ -5,7 +5,7 @@ PluginsManager
 manipulate plugins in various ways
 
 ## General Info
-**version**: 14.04.25
+**version**: 2017.09.12
 
 **description**: Various plugin and server related additions
 
@@ -26,7 +26,7 @@ Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code o
 process for submitting pull requests to us.
 
 ## Author
-FAWONG
+Felix Wong
 
 ## License
 This project is licensed under the GNU General Public License v3.0 License - see the

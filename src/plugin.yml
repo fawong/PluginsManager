@@ -1,8 +1,7 @@
 name: PluginsManager
 main: com.fawong.PluginsManager.PluginsManager
-version: 14.04.25
 website: http://www.fawong.com/minecraft
-author: FAWONG
+author: Felix Wong
 description: Various plugin and server related additions
 commands:
   lp:
