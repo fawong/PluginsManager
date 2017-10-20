@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser()
 waflibs.arg_parse.enable_verbose_logging(parser)
 parser.add_argument("-t", "--template-file", help="template file", type=str)
 parser.add_argument("-p", "--plugin-file", help="plugin file", type=str)
+parser.add_argument("-r", "--readme-file", help="readme file", type=str)
 
 args = parser.parse_args()
 
@@ -32,22 +33,27 @@ if not (template_file and args.plugin_file):
     raise Exception(message)
 
 plugin_config_contents = yaml.load(open(args.plugin_file))
-logger.debug(plugin_config_contents)
+logger.debug("plugin config contents: {}".format(plugin_config_contents))
 
 commands = format_readme(plugin_config_contents["commands"])
 permissions = format_readme(plugin_config_contents["permissions"])
+website = plugin_config_contents["website"]
+author = plugin_config_contents["author"]
 
 template_contents = open(template_file).read()
-logger.debug(template_contents)
+logger.debug("template contents: {}".format(template_contents))
 
 template = Template(template_contents)
 rendered_file = template.render(description=plugin_config_contents["description"],
                                 version=plugin_config_contents["version"],
                                 commands=commands,
-                                permissions=permissions
+                                permissions=permissions,
+                                author=author,
+                                website=website
                                )
+logger.debug("rendered file: {}".format(rendered_file))
 
-f = open(".".join(template_file.split(".")[0:-1]), "w")
+f = open(args.readme_file, "w")
 f.write(rendered_file)
 f.write("\n")
 f.close()
