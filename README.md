@@ -12,10 +12,14 @@ manipulate plugins in various ways
 **description**: Various plugin and server related additions
 
 ### commands
-{'lp': {'description': 'Lists plugins in several different formats', 'usage': '/lp <display type>\nExample: /lp row\nExample: /lp column\n'}, 'pmgr': {'description': 'alias for /pluginsmanager', 'usage': '/pmgr'}, 'listplugins': {'aliases': ['lp'], 'description': 'alias for /listplugins', 'usage': '/listplugins'}, 'pluginsmanager': {'aliases': ['pmgr'], 'description': 'manage plugins', 'usage': '/pluginsmanager'}, 'plm': {'description': 'alias for /pluginsmanager', 'usage': '/plm'}}
+```json
+{"listplugins": {"aliases": ["lp"], "description": "alias for /listplugins", "usage": "/listplugins"}, "lp": {"description": "Lists plugins in several different formats", "usage": "/lp <display type>\nExample: /lp row\nExample: /lp column\n"}, "plm": {"description": "alias for /pluginsmanager", "usage": "/plm"}, "pluginsmanager": {"aliases": ["pmgr"], "description": "manage plugins", "usage": "/pluginsmanager"}, "pmgr": {"description": "alias for /pluginsmanager", "usage": "/pmgr"}}
+```
 
 ### permissions
-{'pluginsmanager.*': {'description': 'Gives access to all pluginsmanager commands', 'children': {'pluginsmanager.enable': True}}}
+```json
+{"pluginsmanager.*": {"children": {"pluginsmanager.enable": true}, "description": "Gives access to all pluginsmanager commands"}}
+```
 
 ## Contributing
 Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the

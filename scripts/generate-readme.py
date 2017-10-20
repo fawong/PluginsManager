@@ -4,7 +4,11 @@ import sys
 import yaml
 import argparse
 import waflibs
+import json
 from jinja2 import Template
+
+def format_readme(yaml_dict):
+    return "```json\n{}\n```".format(json.dumps(yaml_dict, sort_keys=True))
 
 parser = argparse.ArgumentParser()
 waflibs.arg_parse.enable_verbose_logging(parser)
@@ -30,8 +34,8 @@ if not (template_file and args.plugin_file):
 plugin_config_contents = yaml.load(open(args.plugin_file))
 logger.debug(plugin_config_contents)
 
-commands = plugin_config_contents["commands"]
-permissions = plugin_config_contents["permissions"]
+commands = format_readme(plugin_config_contents["commands"])
+permissions = format_readme(plugin_config_contents["permissions"])
 
 template_contents = open(template_file).read()
 logger.debug(template_contents)
