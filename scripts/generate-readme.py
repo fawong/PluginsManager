@@ -5,6 +5,7 @@ import yaml
 import argparse
 import waflibs
 import json
+from xml.etree import ElementTree
 from jinja2 import Template
 
 def format_readme(yaml_dict):
@@ -15,6 +16,7 @@ waflibs.arg_parse.enable_verbose_logging(parser)
 parser.add_argument("-t", "--template-file", help="template file", type=str)
 parser.add_argument("-p", "--plugin-file", help="plugin file", type=str)
 parser.add_argument("-r", "--readme-file", help="readme file", type=str)
+parser.add_argument("-m", "--pom-file", help="pom file", type=str)
 
 args = parser.parse_args()
 
@@ -35,6 +37,10 @@ if not (template_file and args.plugin_file):
 plugin_config_contents = yaml.load(open(args.plugin_file))
 logger.debug("plugin config contents: {}".format(plugin_config_contents))
 
+pom_contents = ElementTree.parse(args.pom_file)
+version = pom_contents.findtext("{http://maven.apache.org/POM/4.0.0}version")
+logger.debug("version is: {}".format(version))
+
 commands = format_readme(plugin_config_contents["commands"])
 permissions = format_readme(plugin_config_contents["permissions"])
 website = plugin_config_contents["website"]
@@ -45,7 +51,7 @@ logger.debug("template contents: {}".format(template_contents))
 
 template = Template(template_contents)
 rendered_file = template.render(description=plugin_config_contents["description"],
-                                version=plugin_config_contents["version"],
+                                version=version,
                                 commands=commands,
                                 permissions=permissions,
                                 author=author,
