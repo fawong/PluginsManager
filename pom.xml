@@ -87,7 +87,7 @@
   <repositories>
     <repository>
       <id>spigot-repository</id>
-      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshot/</url>
+      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
     </repository>
     <repository>
       <id>bstats-repo</id>
