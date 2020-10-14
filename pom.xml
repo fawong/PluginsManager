@@ -110,7 +110,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
     <freemarker.version>2.3.20</freemarker.version>
-    <junit.version>3.8.1</junit.version>
+    <junit.version>4.13.1</junit.version>
     <spigot.version>1.12.1-R0.1-SNAPSHOT</spigot.version>
     <mcstats.version>R6</mcstats.version>
     <shade.version>1.4</shade.version>
