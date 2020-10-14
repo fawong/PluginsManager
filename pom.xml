@@ -57,7 +57,6 @@
           <relocations>
             <relocation>
               <pattern>org.bstats</pattern>
-              <!-- Replace this with your package! -->
               <shadedPattern>com.fawong.PluginsManager</shadedPattern>
             </relocation>
           </relocations>
@@ -87,11 +86,11 @@
   <repositories>
     <repository>
       <id>spigot-repository</id>
-      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots</url>
     </repository>
     <repository>
       <id>bstats-repo</id>
-      <url>http://repo.bstats.org/content/repositories/releases/</url>
+      <url>https://repo.codemc.org/repository/maven-public</url>
     </repository>
   </repositories>
   <developers>
@@ -111,9 +110,9 @@
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
     <freemarker.version>2.3.20</freemarker.version>
     <junit.version>4.13.1</junit.version>
-    <spigot.version>1.12.1-R0.1-SNAPSHOT</spigot.version>
+    <spigot.version>1.16.3-R0.1-SNAPSHOT </spigot.version>
     <mcstats.version>R6</mcstats.version>
     <shade.version>1.4</shade.version>
-    <bstats.version>1.2</bstats.version>
+    <bstats.version>1.7</bstats.version>
   </properties>
 </project>
