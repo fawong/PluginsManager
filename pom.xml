@@ -6,7 +6,7 @@
   <packaging>jar</packaging>
   <version>2022.09.18</version>
   <name>PluginsManager</name>
-  <url>http://maven.apache.org</url>
+  <url>http://minecraft.waf.hk</url>
   <dependencies>
     <dependency>
       <groupId>org.freemarker</groupId>
@@ -83,16 +83,6 @@
       </resource>
     </resources>
   </build>
-  <repositories>
-    <repository>
-      <id>spigot-repository</id>
-      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots</url>
-    </repository>
-    <repository>
-      <id>bstats-repo</id>
-      <url>https://repo.codemc.org/repository/maven-public</url>
-    </repository>
-  </repositories>
   <developers>
     <developer>
       <id>fawong</id>
