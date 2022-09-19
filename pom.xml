@@ -4,7 +4,7 @@
   <groupId>com.fawong.PluginsManager</groupId>
   <artifactId>PluginsManager</artifactId>
   <packaging>jar</packaging>
-  <version>2017.09.12</version>
+  <version>2022.09.18</version>
   <name>PluginsManager</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -110,7 +110,7 @@
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
     <freemarker.version>2.3.31</freemarker.version>
     <junit.version>5.9.0</junit.version>
-    <spigot.version>1.16.3-R0.1-SNAPSHOT </spigot.version>
+    <spigot.version>1.16.3-R0.1-SNAPSHOT</spigot.version>
     <mcstats.version>R6</mcstats.version>
     <shade.version>3.4.0</shade.version>
     <bstats.version>1.7</bstats.version>
