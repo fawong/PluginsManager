@@ -1,0 +1,17 @@
+name: "generate readme"
+
+on:
+  push:
+    branches: [main]
+    
+jobs:
+  readme:
+    name: generate readme
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - run: |
+      ./scripts/generate-readme --template-file ./scripts/README.md.template --plugin-file ./src/config.yml --readme-file README.md --pom-file pom.xml
