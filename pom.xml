@@ -108,11 +108,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
-    <freemarker.version>2.3.20</freemarker.version>
-    <junit.version>4.13.1</junit.version>
+    <freemarker.version>2.3</freemarker.version>
+    <junit.version>4.13</junit.version>
     <spigot.version>1.16.3-R0.1-SNAPSHOT </spigot.version>
     <mcstats.version>R6</mcstats.version>
-    <shade.version>1.4</shade.version>
+    <shade.version>3.4</shade.version>
     <bstats.version>1.7</bstats.version>
   </properties>
 </project>
